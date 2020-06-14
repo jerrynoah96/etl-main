@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+  <style>
+      body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.9);
+    
+  }
+  .top__bar{
+    background-color: rgba(30, 144, 255);
+    width: 100vw;
+    overflow: hidden;
+    position: fixed;
+    height: 5vh;
+    position: fixed;
+    z-index: 2;
+    box-shadow: 0.1rem 0.1rem 1rem #000;
+    z-index: 5;
+    
+    
+  }
+  #etl{
+    position: absolute;
+    top: -60%;
+    left: 2%;
+    color: white;
+    font-family: cursive;
+  }
+  #main{
+    width: auto;
+    height: auto;
+    margin: 0;
+    position: relative;
+    background-color: white;
+    
+
+    
+  }
+  .side__nav{
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100vh;
+    width: 4vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    z-index: 2;
+    padding-top: 8%;
+    text-align: center;
+    
+    
+  }
+  .side__nav-icon__box{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+  }
+  .nav-icon{
+    height: 1.35rem;
+    width: 1.35rem;
+    cursor: pointer;
+  }
+
+  .sections{
+    
+    position: absolute;
+    width: auto;
+    height: 98vh;
+    margin-top: 0.5%;
+    top: 10%;
+    left: 7.5%;
+    display: flex;
+    background-color: white;
+    
+    
+  }
+  .column{
+    
+    height: auto;
+    width: 30vw;
+    overflow-y: scroll;
+    border-right: thin solid black;
+    text-align: center;
+    position: relative;
+
+  }
+  .column-icon__box{
+    margin-top: 2.5rem;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
+  }
+  .column-header__icon{
+    height: 45%;
+    width: 10%;
+    margin-bottom: -5%;
+    
+  }
+  .column-header{
+    font-family: cursive;
+    color: rgba(30, 144, 255);
+    font-size: 1rem;
+  }
+  .column-header__bottom-line{
+    width: 80%;
+  }
+  .profiles-grid{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 0.5rem;
+  }
+  .top-profile{
+    display: relative;
+    width: 45%;
+    height: 2.3rem;
+    border: thin solid rgba(0, 0, 0, 0.7);
+    border-radius: 1rem;
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+    margin-top: 1rem; 
+    box-shadow: 0 0.2rem 0.5rem black;
+    cursor: pointer;
+  }
+  .Defi-profile{
+    display: relative;
+    width: 45%;
+    height: 2.3rem;
+    border: thin solid rgba(0, 0, 0, 0.7);
+    border-radius: 1rem;
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+    margin-top: 1rem; 
+    box-shadow: 0 0.2rem 0.5rem black;
+    cursor: pointer;
+  }
+  .eth2-profile{
+    display: relative;
+    width: 45%;
+    height: 2.3rem;
+    border: thin solid rgba(0, 0, 0, 0.7);
+    border-radius: 1rem;
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+    margin-top: 1rem; 
+    box-shadow: 0 0.2rem 0.5rem black;
+    cursor: pointer;
+  }
+  .name{
+    display: absolute;
+    top: 10%;
+    transform: translateY(-40%);
+    
+  }
+  .profile-name{
+    margin-bottom: 0;
+    font-weight: bolder;
+    font-size: 0.9rem;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .twitter-username{
+    font-size: 0.7rem;
+    font-family: cursive;
+  }
+  .profile-fetched-tweet{
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    background-color: rgba(255, 255, 255);
+    top: 25%;
+    left:5%;
+    box-shadow: 0 0.1rem 0.5rem black;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    display: none;
+  }
+  .Defi-fetched-tweet{
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    background-color: rgba(255, 255, 255);
+    top: 25%;
+    box-shadow: 0 0.1rem 0.5rem black;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    display: none;
+  }
+  .eth2-fetched-tweet{
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    background-color: rgba(255, 255, 255);
+    top: 25%;
+    box-shadow: 0 0.1rem 0.5rem black;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    display: none;
+  }
+  .close{
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    transform: rotate(45deg);
+    right: 5%;
+    top: 2%;
+    cursor: pointer;
+  }
+  .loader{
+    position: absolute;
+    align-self: center;
+    top: 15%;
+  
+  }
+
+
+  .fetched-tweet::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+  .fetched-tweet::-webkit-scrollbar-thumb {
+    background: rgba(30, 144, 255);
+  }
+  .fetched-tweet::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.3rem grey;
+    border-radius: 0.2rem;
+  }
+
+  .column::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+  .column::-webkit-scrollbar-thumb {
+    background: rgba(30, 144, 255);
+  }
+  .columns::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.3rem grey;
+    border-radius: 0.2rem;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.3rem;
+    height: 0.5rem;
+    border-radius: 2rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(30, 144, 255);
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.3rem grey;
+    border-radius: 1rem;
+    
+  }
+  
+  </style>
+  <body>
+    <!-- header-->
+    <header class="top__bar">
+      <p id="etl">Ethereum Tweets Library</p>
+
+    </header>
+    <!---main web app body-->
+    <div id="main">
+      <!--side bar-->
+      <nav class="side__nav">
+        <div class="side__nav-icon__box">
+          <img src="300ppi/500ppi/Iconly Bold Home.png" alt="" id="home-icon" class="nav-icon">
+          <img src="300ppi/500ppi/Asset 16.png" alt="" id="notification-icon" class="nav-icon">
+          <img src="300ppi/500ppi/Message-5.png" alt="" id="message-icon" class="nav-icon">
+      </div>
+      </nav>
+
+
+      <!--sections-->
+      <div class="sections">
+
+        <!-- top profiles section-->
+        <section class="column" id="profiles">
+          <div class="column-icon__box">
+            <img src="300ppi/500ppi/Asset 18.png" alt="" class="column-header__icon">
+            <h3 class="column-header">Ethereum Top Profiles</h3>
+          </div>
+          <hr class="column-header__bottom-line">
+
+          <div class="profiles-grid">
+            <div class="top-profile">
+              <p class="name" > <span class="profile-name general-profile">Ayodeji Awosika</span>  <span class="twitter-username" >@Ebunayo008</span></p>
+              
+            </div>
+
+          </div>
+
+          <!--top profiles pop up tweets display-->
+          <div class="profile-fetched-tweet fetched-tweet">
+            <div class="close profile-tweets-close">+</div>
+            <div class="profileTweetsLoader loader">
+              <img src="Loader/loading.gif" alt="" srcset="">
+            </div>
+            
+
+          </div>
+        </section>
+
+
+        <!-- //community tweets section to be added later
+        <section class="column" id="community-tweets">
+          <div class="column-icon__box">
+            <img src="300ppi/500ppi/Asset 17.png" alt="" class="column-header__icon">
+            <h3 class="column-header">Ethereum Community Tweets</h3>
+          </div>
+          <hr class="column-header__bottom-line">
+          
+         </section> -->
+
+         <!--Defi tweets section-->
+        <section class="column" id="Defi">
+          <div class="column-icon__box">
+            <img src="300ppi/500ppi/Asset 20.png" alt="" class="column-header__icon">
+            <h3 class="column-header">Defi</h3>
+          </div>
+          <hr class="column-header__bottom-line">
+
+          <div class="profiles-grid">
+            <div class="Defi-profile">
+              <p class="name" > <span class="profile-name">Ayodeji Awosika</span>  <span class="twitter-username" >@Ebunayo008</span></p>
+              
+            </div>
+
+            <!--Defi tweets pop up-->
+            <div class="Defi-fetched-tweet fetched-tweet">
+              <div class="close defi-tweets-close">+</div>
+              <div class="DefiTweetsLoader loader">
+                <img src="Loader/loading.gif" alt="" srcset="">
+              </div>
+
+            </div>
+        </section>
+
+        <!--Eth2.0 section-->
+        <section class="column" id="eth2.0">
+          <div class="column-icon__box">
+            <img src="300ppi/500ppi/Iconly Bold Activity.png" alt="" class="column-header__icon">
+            <h3 class="column-header">Eth 2.0</h3>
+          </div>
+          <hr class="column-header__bottom-line">
+
+          <div class="profiles-grid">
+            <div class="eth2-profile">
+              <p class="name" > <span class="profile-name">Ayodeji Awosika</span>  <span class="twitter-username" >@Ebunayo008</span></p>
+              
+            </div>
+
+            <!--Eth2 tweets pop up display-->
+            <div class="eth2-fetched-tweet fetched-tweet">
+              <div class="close eth2-tweets-close">+</div>
+              <div class="eth2TweetsLoader loader">
+                <img src="Loader/loading.gif" alt="" srcset="">
+              </div>
+
+            </div>
+          
+        </section>
+      </div>
+
+      
+    </div>
+    
+  <script>
+        // selecting profiles
+
+    const topProfiles = document.querySelector('.top-profile');
+    const defiProfiles = document.querySelector('.Defi-profile');
+    const eth2Profiles = document. querySelector('.eth2-profile');
+
+
+    // selecting tweet-display div for each section
+
+    const topProfilesTweets = document.querySelector('.profile-fetched-tweet');
+    const defiTweets = document.querySelector('.Defi-fetched-tweet');
+    const eth2Tweets = document.querySelector('.eth2-fetched-tweet');
+
+    // selecting the close icon for each tweet-display div
+
+    const closeTopProfileTweets = document.querySelector('.profile-tweets-close');
+    const closeDefiTweets = document.querySelector('.defi-tweets-close');
+    const closeEth2Tweets = document.querySelector('.eth2-tweets-close');
+
+    // add event Listener for profile-clicking to display tweets 
+
+    topProfiles.addEventListener('click', ()=>{
+      topProfilesTweets.style.display = 'flex';
+    });
+
+    defiProfiles.addEventListener('click', ()=>{
+      defiTweets.style.display = 'flex';
+    });
+
+    eth2Profiles.addEventListener('click', ()=>{
+      eth2Tweets.style.display = 'flex';
+    });
+
+    // add event Listener to close fetched tweets display
+    closeTopProfileTweets.addEventListener('click', ()=>{
+      topProfilesTweets.style.display = 'none';
+    });
+
+    closeDefiTweets.addEventListener('click', ()=>{
+      defiTweets.style.display = 'none';
+    });
+
+    closeEth2Tweets.addEventListener('click', ()=>{
+      eth2Tweets.style.display = 'none';
+    })
+
+  
+  
+  </script>  
+  </body>
+</html>
